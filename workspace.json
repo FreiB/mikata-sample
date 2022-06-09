@@ -3,6 +3,6 @@
   "version": 2,
   "projects": {
     "sample-app": "apps/sample-app",
-    "sample-app-e2e": "apps/sample-app-e2e"
+    "server-sample": "apps/server-sample"
   }
 }

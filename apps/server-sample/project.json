@@ -1,0 +1,56 @@
+{
+  "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
+  "sourceRoot": "apps/server-sample/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/server-sample",
+        "main": "apps/server-sample/src/server.ts",
+        "tsConfig": "apps/server-sample/tsconfig.app.json",
+        "assets": [
+          "apps/server-sample/src/assets",
+          "apps/server-sample/src/package.json"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "externalDependencies": "none",
+          "fileReplacements": [
+            {
+              "replace": "apps/server-sample/src/environments/environment.ts",
+              "with": "apps/server-sample/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "server-sample:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/server-sample/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/server-sample"],
+      "options": {
+        "jestConfig": "apps/server-sample/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
